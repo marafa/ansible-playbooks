@@ -9,6 +9,8 @@
    ip: 192.168.0.105
    fqdn: spacewalk.marafa.vm
    spc_ver: 2.2-1 #pacewalk-client-repo version
+   rhnuser: administrator
+   rhnpw: password
   tasks: 
   - name: Upgrade ca-certificates
     yum: name=ca-certificates state=latest
@@ -38,18 +40,4 @@
     - python-hashlib
   - name: Install spacewalk cert
     yum: name=http://{{ fqdn }}/pub/rhn-org-trusted-ssl-cert-1.0-1.noarch.rpm state=present
-  - rhn_register: state=present activationkey={{ key }} server_url=https://{{ fqdn }}/XMLRPC username=administrator password=password
-# Register as user (joe_user) with password (somepass) and auto-subscribe to available content.
-#  - redhat_subscription: state=present username=joe_user password=somepass autosubscribe=true
-#
-# # Register with activationkey (1-222333444) and consume subscriptions matching
-# # the names (Red hat Enterprise Server) and (Red Hat Virtualization)
-#  - redhat_subscription: state=present                          activationkey={{ key }}                          server_hostname=spacewalk.marafa.vm
-
-
-#rhnreg_ks --activationkey=1-$os$version-$bits --serverUrl=https://$fqdn/XMLRPC --force
-
-#1-centos6-x86_64
-#ansible_distribution #centos
-#ansible_distribution_major_version #6
-#ansible_architecture #x86_64
+  - rhn_register: state=present activationkey={{ key }} server_url=https://{{ fqdn }}/XMLRPC username={{ rhnuser }}  password={{ rhnpw }}
