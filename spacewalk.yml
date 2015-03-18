@@ -14,6 +14,12 @@
     yum: name=ca-certificates state=latest
   - name: Install epel-repo
     yum: name=epel-release state=latest
+    yum: pkg={{ item }} state=latest
+    when: ansible_os_family == 'RedHat'
+    with_items:
+    - epel-release
+    - libselinux-python
+  - selinux: state=disabled #modifies /etc/syconfig/selinux only
   - name: Erase rhn-org-trusted-ssl-cert
     yum: name=rhn-org-trusted-ssl-cert state=absent
   - name: Add spacewalk FQDN to /etc/hosts
