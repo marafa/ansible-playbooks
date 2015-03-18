@@ -1,0 +1,3 @@
+- hosts: new
+  tasks:
+  - service: name=iptables state=stopped enabled=off

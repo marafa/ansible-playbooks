@@ -1,0 +1,5 @@
+- hosts: client.ansible.vm
+  tasks:
+  - name: install net-snmp
+    yum: name=net-snmp state=latest
+  - service: name=snmpd state=restarted enabled=yes

@@ -1,0 +1,10 @@
+- hosts: new
+  user: root
+  sudo: no
+  tasks:
+  - name: download custom script
+    shell: wget http://192.168.0.105/pub/custom.sh
+  - name: chmod +x custom.sh 
+    file: path=/root/custom.sh mode=0755
+  - name: run custom script
+    shell: ~/custom.sh

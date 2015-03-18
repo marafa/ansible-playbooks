@@ -1,0 +1,8 @@
+- hosts: client.ansible.vm
+  user: root
+  sudo: no
+  tasks:
+        - name: check ntp
+          yum: pkg=ntp state=present
+#          shell: ntpq -p
+        

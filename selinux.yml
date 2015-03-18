@@ -1,0 +1,7 @@
+- hosts: new
+  tasks:
+#   - name: Install selinux python bindings
+   - yum: name=libselinux-python state=present
+   - selinux: state=disabled #modifies /etc/syconfig/selinux only
+   - name: Disable selinux from cli
+     action: command setenforce 0

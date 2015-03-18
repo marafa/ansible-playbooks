@@ -1,0 +1,49 @@
+#ansible-playbook -i spacewalk.py playbook.yml #https://groups.google.com/forum/#!msg/ansible-project/zjlUf1nKYls/Rj5I0354IQEJ
+#http://www.it-hure.de/2013/07/thank-you-seth-vidal-my-first-ansible-playbook/
+
+- hosts: new
+  user: root
+  sudo: no
+  vars:
+   key: 1-{{ ansible_distribution + ansible_distribution_major_version }}-{{ ansible_architecture }}
+   ip: 192.168.0.105
+   fqdn: spacewalk.marafa.vm
+   spc_ver: 2.2-1 #pacewalk-client-repo version
+  tasks: 
+  - name: Upgrade ca-certificates
+    yum: name=ca-certificates state=latest
+  - name: Install epel-repo
+    yum: name=epel-release state=latest
+  - name: Erase rhn-org-trusted-ssl-cert
+    yum: name=rhn-org-trusted-ssl-cert state=absent
+  - name: Add spacewalk FQDN to /etc/hosts
+    lineinfile: dest=/etc/hosts line="{{ ip }}\t{{ fqdn}}"
+  - name: Install spacewalk client repo 
+    yum: name=http://{{ fqdn }}/pub/spacewalk-client-repo-{{ spc_ver }}.el6.noarch.rpm state=present
+#    yum: name=http://yum.spacewalkproject.org/2.2-client/RHEL/6/x86_64/spacewalk-client-repo-2.2-1.el6.noarch.rpm state=latest
+  - name: Install RHN support packages
+    yum: pkg={{ item }} state=installed
+    when: ansible_os_family == 'RedHat' and ansible_distribution_major_version|int >= 6
+    with_items:
+    - rhn-setup
+    - yum-rhn-plugin 
+    - python-dmidecode 
+    - yum-plugin-security.noarch 
+    - python-hashlib
+  - name: Install spacewalk cert
+    yum: name=http://{{ fqdn }}/pub/rhn-org-trusted-ssl-cert-1.0-1.noarch.rpm state=present
+  - rhn_register: state=present activationkey={{ key }} server_url=https://{{ fqdn }}/XMLRPC username=administrator password=password
+# Register as user (joe_user) with password (somepass) and auto-subscribe to available content.
+#  - redhat_subscription: state=present username=joe_user password=somepass autosubscribe=true
+#
+# # Register with activationkey (1-222333444) and consume subscriptions matching
+# # the names (Red hat Enterprise Server) and (Red Hat Virtualization)
+#  - redhat_subscription: state=present                          activationkey={{ key }}                          server_hostname=spacewalk.marafa.vm
+
+
+#rhnreg_ks --activationkey=1-$os$version-$bits --serverUrl=https://$fqdn/XMLRPC --force
+
+#1-centos6-x86_64
+#ansible_distribution #centos
+#ansible_distribution_major_version #6
+#ansible_architecture #x86_64

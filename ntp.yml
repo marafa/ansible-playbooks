@@ -1,0 +1,6 @@
+- hosts: client.ansible.vm
+  vars:
+  - ntp_timezone: America/New_York    
+  - roles:
+      - { role: geerlingguy.ntp }
+  - service: name=ntpd state=restarted enabled=yes

@@ -1,0 +1,18 @@
+- hosts: new
+  tasks:
+  - name: Install epel repo
+    yum: name=epel-release state=latest
+  - name: Install vnstat
+    yum: name=vnstat state=latest
+  - service: name=vnstat state=restarted enabled=yes
+  - name: Initialise nic db for vnstat
+    shell: "
+if [ -f /usr/bin/vnstat ]
+then
+        for int in `vnstat --iflist| sed 's/Available interfaces://'`
+        do
+                vnstat -u -i $int
+        done"
+  - name: change owner of /var/lib/vnstat/* to vnstat.vnstat
+    file: path=/var/lib/vnstat/* owner=vnstat group=vnstat
+  - service: name=vnstat status=started enabled=yes
