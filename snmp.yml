@@ -1,4 +1,4 @@
-- hosts: client.ansible.vm
+- hosts: new
   tasks:
   - name: install net-snmp
     yum: name=net-snmp state=latest

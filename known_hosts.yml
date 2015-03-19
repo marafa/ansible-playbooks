@@ -1,5 +1,5 @@
 # will show misconfigured host but not stop for them
-- hosts: all
+- hosts: new
   sudo: False
   vars:
     keyfile: /tmp/known_hosts
@@ -16,7 +16,7 @@
       local_action: shell ssh-keyscan -p {{ansible_ssh_port|default(22)}} -H {{ansible_default_ipv4.address}} 2> /dev/null >> {{keyfile}}
       ignore_errors: True
 
-- hosts: all
+- hosts: new
   sudo: True
   tasks:
     - name: copy into place

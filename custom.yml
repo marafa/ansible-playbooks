@@ -2,7 +2,7 @@
   user: root
   sudo: no
   tasks:
-  - name: download custom script
+  - name: Download custom script
     shell: wget http://192.168.0.105/pub/custom.sh
   - name: chmod +x custom.sh 
     file: path=/root/custom.sh mode=0755

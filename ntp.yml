@@ -1,4 +1,4 @@
-- hosts: client.ansible.vm
+- hosts: new
   vars:
   - ntp_timezone: America/New_York    
   - roles:

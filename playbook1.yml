@@ -1,4 +1,4 @@
-- hosts: client.ansible.vm
+- hosts: new
   user: root
   sudo: no
   tasks:

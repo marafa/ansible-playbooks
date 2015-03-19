@@ -1,0 +1,9 @@
+#- hosts: new
+- include: /root/ansible-playbooks/spacewalk.yml
+- include: /root/ansible-playbooks/iptables.yml
+- include: /root/ansible-playbooks/yum_update.yml
+- include: /root/ansible-playbooks/ntp.yml
+- include: /root/ansible-playbooks/selinux.yml
+- include: /root/ansible-playbooks/snmp.yml
+- include: /root/ansible-playbooks/vnstat.yml
+- include: /root/ansible-playbooks/reboot.yml

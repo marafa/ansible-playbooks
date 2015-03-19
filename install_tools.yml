@@ -1,0 +1,21 @@
+- hosts: new
+  tasks:
+  - name: Install Tools
+    yum: pkg={{ item }} state=latest
+    when: ansible_os_family == 'RedHat' #and ansible_lab.major_release|int >= 6
+    with_items:
+    ### from epel repo
+    - htop 
+    - byobu 
+    - alpine 
+    - vnstat 
+    - multitail 
+    - bash-completion
+    ### from default repos
+    - iotop 
+    - screen 
+    - vim-enhanced 
+    - yum-presto 
+    - wget 
+    - vim 
+    - net-snmp
