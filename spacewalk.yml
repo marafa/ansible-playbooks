@@ -5,7 +5,8 @@
   user: root
   sudo: no
   vars:
-   key: 1-{{ ansible_distribution + ansible_distribution_major_version }}-{{ ansible_architecture }}
+#   ansible_distribution: centos #workaround as it comes out as CentOS
+   key: 1-{{ ansible_distribution|lower + ansible_distribution_major_version }}-{{ ansible_architecture }}
    ip: 192.168.0.105
    fqdn: spacewalk.marafa.vm
    spc_ver: 2.2-1 #pacewalk-client-repo version
@@ -40,4 +41,10 @@
     - python-hashlib
   - name: Install spacewalk cert
     yum: name=http://{{ fqdn }}/pub/rhn-org-trusted-ssl-cert-1.0-1.noarch.rpm state=present
+  - name: Configure up2date config file
+    lineinfile: dest=/etc/sysconfig/rhn/up2date regexp='sslCACert=/usr/share/rhn/RHNS-CA-CERT' line='sslCACert=/usr/share/rhn/RHN-ORG-TRUSTED-SSL-CERT'
+    lineinfile: dest=/etc/sysconfig/rhn/up2date regexp='serverURL=.$' line='https://{{ fqdn }}/XMLRPC'
   - rhn_register: state=present activationkey={{ key }} server_url=https://{{ fqdn }}/XMLRPC username={{ rhnuser }}  password={{ rhnpw }}
+  - name: Remove /etc/yum.repos.d/Cent*repo files
+    shell: rm -rf /etc/yum.repos.d/Cent*repo
+
