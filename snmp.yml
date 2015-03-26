@@ -1,5 +1,6 @@
-- hosts: new
+- hosts: all
   tasks:
-  - name: install net-snmp
+  - name: Install net-snmp
     yum: name=net-snmp state=latest
+  - copy: src=/root/ansible-playbooks/files/snmpd.conf dest=/etc/snmp/snmpd.conf mode=0600 owner=root group=root
   - service: name=snmpd state=restarted enabled=yes
