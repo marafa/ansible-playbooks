@@ -9,4 +9,5 @@
 - include: /root/ansible-playbooks/selinux.yml
 - include: /root/ansible-playbooks/snmp.yml
 - include: /root/ansible-playbooks/vnstat.yml
+- include: /root/ansible-playbooks/utf8.yml
 - include: /root/ansible-playbooks/reboot.yml
