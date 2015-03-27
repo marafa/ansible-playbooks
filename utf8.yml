@@ -1,0 +1,7 @@
+#ansible-playbook -i spacewalk.py playbook.yml #https://groups.google.com/forum/#!msg/ansible-project/zjlUf1nKYls/Rj5I0354IQEJ
+#http://www.it-hure.de/2013/07/thank-you-seth-vidal-my-first-ansible-playbook/
+
+- hosts: new
+  tasks:
+  - name: Change local from en_GB to en_US.UTF-8
+    lineinfile: dest=/etc/sysconfig/i18n regexp='en_GB' line='en_US.UTF-8'
