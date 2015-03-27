@@ -1,4 +1,7 @@
 #- hosts: new
+
+- hosts: new
+  gather_facts: no
 - include: /root/ansible-playbooks/spacewalk.yml
 - include: /root/ansible-playbooks/iptables.yml
 - include: /root/ansible-playbooks/yum_update.yml
