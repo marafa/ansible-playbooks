@@ -9,7 +9,7 @@ git repo to host my ansible playbooks used in my home lab
 - ntp.yml 	- a playbook to configure timezone and enable ntp timezone
 - reboot.yml	- reboots the target host
 - selinux.yml 	- disables selinux via cli and on next reboot
-- snmp.yml	- installs and enables snmp
+- snmp.yml	- installs, copies snmpd.conf and enables snmp to work with zenoss
 - spacewalk.yml	- configures the target server to become a spacewalk client
 - vnstat.yml	- configures and starts vnstat
 - yum_update.yml - yum updates hosts
