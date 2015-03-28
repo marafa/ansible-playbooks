@@ -1,19 +1,5 @@
-- hosts: new
+- hosts: all
   tasks:
-  - name: Erase packages
-    yum: pkg={{ item }} state=absent
-#    when: ansible_os_family == 'RedHat' and ansible_lsb.major_release|int >= 6
-    when: ansible_os_family == 'RedHat'
-    with_items:
-    - matahari*
-    - fprint*
-  - name: Install yum-presto
-    yum: pkg={{ item }} state=latest
-#    when: ansible_os_family == 'RedHat' and ansible_lsb.major_release|int >= 6
-    when: ansible_os_family == 'RedHat'
-    with_items:
-    - yum-presto
-    - deltarpm 
   - name: Upgrade all packages
     yum: name=* state=latest
   - name: Remove /etc/yum.repos.d/Cent*repo files
