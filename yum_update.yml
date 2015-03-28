@@ -2,12 +2,3 @@
   tasks:
   - name: Upgrade all packages
     yum: name=* state=latest
-  vars:
-   files: /etc/yum.repos.d/CentOS-*.repo
-  tasks:
-  - name: Do CentOS Repo files exist?
-    stat: path={{ files }}
-    register: repo_exist
-  - name: Delete CentOS repo files
-    command: rm -rf {{ files }}
-    when: repo_exist.stat.exists
