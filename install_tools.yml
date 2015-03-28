@@ -1,4 +1,4 @@
-- hosts: new
+- hosts: centos
   tasks:
   - name: Install Tools
     yum: pkg={{ item }} state=latest
@@ -20,3 +20,4 @@
     - wget 
     - vim 
     - net-snmp
+    - redhat-lsb

@@ -1,4 +1,4 @@
-- hosts: new
+- hosts: centos
   tasks:
 #   - name: Install selinux python bindings
    - yum: name=libselinux-python state=present

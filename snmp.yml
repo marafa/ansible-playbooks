@@ -1,4 +1,4 @@
-- hosts: all
+- hosts: centos
   tasks:
   - name: Install net-snmp
     yum: name=net-snmp state=latest

@@ -1,4 +1,4 @@
-- hosts: new
+- hosts: 192.168.0.115:new
   vars:
   - ntp_timezone: America/New_York    
   - roles:
