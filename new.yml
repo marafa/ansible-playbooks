@@ -5,6 +5,7 @@
 - include: /root/ansible-playbooks/spacewalk.yml
 - include: /root/ansible-playbooks/iptables.yml
 - include: /root/ansible-playbooks/yum_update.yml
+- include: /root/ansible-playbooks/delete_centos_repos.yml
 - include: /root/ansible-playbooks/ntp.yml
 - include: /root/ansible-playbooks/selinux.yml
 - include: /root/ansible-playbooks/snmp.yml
