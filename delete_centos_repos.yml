@@ -1,4 +1,4 @@
-- hosts: centos
+- hosts: centos:!192.168.0.105
   vars: 
    files: /etc/yum.repos.d/CentOS-*.repo
   tasks:
