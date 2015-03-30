@@ -45,6 +45,4 @@
     lineinfile: dest=/etc/sysconfig/rhn/up2date regexp='sslCACert=/usr/share/rhn/RHNS-CA-CERT' line='sslCACert=/usr/share/rhn/RHN-ORG-TRUSTED-SSL-CERT'
     lineinfile: dest=/etc/sysconfig/rhn/up2date regexp='serverURL=.$' line='https://{{ fqdn }}/XMLRPC'
   - rhn_register: state=present activationkey={{ key }} server_url=https://{{ fqdn }}/XMLRPC username={{ rhnuser }}  password={{ rhnpw }}
-  - name: Remove /etc/yum.repos.d/Cent*repo files
-    shell: rm -rf /etc/yum.repos.d/Cent*repo
 
