@@ -4,4 +4,4 @@
 - hosts: centos
   tasks:
   - name: Change local from en_GB to en_US.UTF-8
-    lineinfile: dest=/etc/sysconfig/i18n regexp='en_GB' line='en_US.UTF-8'
+    lineinfile: dest=/etc/sysconfig/i18n regexp='en_GB' line='LANG="en_US.UTF-8"'
