@@ -1,10 +1,18 @@
-- hosts: centos:!192.168.0.105:new
+- hosts: new:centos:!192.168.0.105
   vars: 
-   files: /etc/yum.repos.d/CentOS-*.repo
+#   files: /etc/yum.repos.d/CentOS-Base.repo
+   - dir: /etc/yum.repos.d/
+   - files: "{{ dir }}/{{ item }}"
+     with items:
+       - CentOS-Base.repo
+       - CentOS-Debuginfo.repo
+       - CentOS-fasttrack.repo
+       - CentOS-Media.repo
+       - CentOS-Vault.repo
   tasks:
   - name: Do CentOS Repo files exist?
     stat: path={{ files }}
     register: repo_exist
   - name: Delete CentOS repo files
-    command: rm -rf {{ files }}
+    command: rm -rf /etc/yum.repos.d/CentOS-\*.repo
     when: repo_exist.stat.exists
