@@ -5,5 +5,7 @@
   vars:
   - ntp_timezone: America/New_York    
   tasks:
+  - name: Install yum
+    yum: pkg=ntp state=present
   - name: Enable and restart NTP
     service: name=ntpd state=restarted enabled=yes
