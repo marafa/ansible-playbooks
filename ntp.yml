@@ -1,6 +1,9 @@
-- hosts: 192.168.0.115:new
+- hosts: centos:new
+  roles:
+  - { role: geerlingguy.ntp }
+#  gather_facts: no
   vars:
   - ntp_timezone: America/New_York    
-  - roles:
-      - { role: geerlingguy.ntp }
-  - service: name=ntpd state=restarted enabled=yes
+  tasks:
+  - name: Enable and restart NTP
+    service: name=ntpd state=restarted enabled=yes
